@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:space_x_flutter_app/core/models/launch.dart';
 
 class LaunchManager {
+
   List<Launch> launchsList;
   Launch launchDetail;
 
@@ -65,7 +66,7 @@ class LaunchManager {
     return matchingLaunches;
   }
 
-  Future<Launch> getSpotDetail(int id) async {
+  Future<Launch> getSpotDetail(String id) async {
     var dio = Dio();
     try {
       launchDetail = await dio.get<Map<String, dynamic>>("https://api.spacexdata.com/v4/launches/$id")
