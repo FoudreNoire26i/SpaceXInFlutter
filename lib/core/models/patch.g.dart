@@ -12,7 +12,7 @@ Patch _$PatchFromJson(Map<String, dynamic> json) {
     $checkedConvert(json, 'large', (v) => val.imageLargeUrl = v as String);
     $checkedConvert(json, 'small', (v) => val.imageSmallUrl = v as String);
     return val;
-  }, fieldKeyMap: const {'imageFullUrl': 'large', 'imageLargeUrl': 'small'});
+  }, fieldKeyMap: const {'imageLargeUrl': 'large', 'imageSmallUrl': 'small'});
 }
 
 Map<String, dynamic> _$PatchToJson(Patch instance) => <String, dynamic>{

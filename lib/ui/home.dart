@@ -30,13 +30,14 @@ class _MyHomePageState extends State<MyHomePage> {
         future : LaunchManager().getData(),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
+            var launches = snapshot.data as List<Launch>;
             return ListView.builder(
-                itemCount : LaunchManager().launchsList.length - 1,
+                itemCount : launches.length - 1,
                 itemBuilder: (context,position){
                   return ListTile(
-                    leading: Image.network(LaunchManager().launchsList[position].links.patch.imageLargeUrl),
-                    title: Text((snapshot.data as List<Launch>)[position].name,style: new TextStyle(fontWeight: FontWeight.bold)),
-                    subtitle: Text(LaunchManager().launchsList[position].id),
+                    leading: Image.network(launches[position].links.patch.imageLargeUrl),
+                    title: Text(launches[position].name,style: new TextStyle(fontWeight: FontWeight.bold)),
+                    subtitle: Text(launches[position].id),
                     onTap: (){
                       Navigator.push(context, new MaterialPageRoute(builder: (context)=>DetailItem(selectedIndex: position)));
                     },
