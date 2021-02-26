@@ -17,7 +17,7 @@ class _DetailItem extends State<DetailItem> {
   @override
   Widget build(BuildContext context) {
 
-    Launch my2Spot= LaunchManager().launchsList[widget.selectedIndex];
+    Launch mylaunch= LaunchManager().launchsList[widget.selectedIndex];
 
     // This method is rerun every time setState is called.
     //
@@ -28,16 +28,18 @@ class _DetailItem extends State<DetailItem> {
       appBar: AppBar(
         // Here we take the value from the HomePage object that was created by
         // the App.build method, and use it to set our appbar title.
-        title: Text(my2Spot.name),
+        title: Text(mylaunch.name),
       ),
 
       body: FutureBuilder(
-        future: LaunchManager().getSpotDetail(my2Spot.id),
+        future: LaunchManager().getSpotDetail(mylaunch.id),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             return Column(
                 children: [
-                  Text(my2Spot.name),
+                  Image.network(mylaunch.links.patch.imageSmallUrl),
+                  SizedBox(height: 10),
+                  Text(mylaunch.name),
                   SizedBox(height: 10),
                 ]
             );

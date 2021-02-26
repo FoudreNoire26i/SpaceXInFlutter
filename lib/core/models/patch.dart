@@ -6,9 +6,9 @@ part 'patch.g.dart';
     checked: true, explicitToJson: true, fieldRename: FieldRename.snake)
 class Patch {
   @JsonKey(name:"large")
-  String imageFullUrl;
-  @JsonKey(name: "small")
   String imageLargeUrl;
+  @JsonKey(name: "small")
+  String imageSmallUrl;
 
   Patch();
 

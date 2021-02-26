@@ -30,12 +30,11 @@ class _MyHomePageState extends State<MyHomePage> {
         future : LaunchManager().getData(),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
-            print((snapshot.data as List<Launch>)[0].links.patch.imageFullUrl);
             return ListView.builder(
                 itemCount : LaunchManager().launchsList.length - 1,
                 itemBuilder: (context,position){
                   return ListTile(
-                    //leading: Image.network(LaunchManager().launchsList[position].name),
+                    leading: Image.network(LaunchManager().launchsList[position].links.patch.imageLargeUrl),
                     title: Text((snapshot.data as List<Launch>)[position].name,style: new TextStyle(fontWeight: FontWeight.bold)),
                     subtitle: Text(LaunchManager().launchsList[position].id),
                     onTap: (){
