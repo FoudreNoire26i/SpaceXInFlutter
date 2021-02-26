@@ -30,6 +30,7 @@ class _MyHomePageState extends State<MyHomePage> {
         future : LaunchManager().getData(),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
+            print((snapshot.data as List<Launch>)[0].links.patch.imageFullUrl);
             return ListView.builder(
                 itemCount : LaunchManager().launchsList.length - 1,
                 itemBuilder: (context,position){

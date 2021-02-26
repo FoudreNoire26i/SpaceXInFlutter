@@ -11,6 +11,8 @@ class Launch {
   bool success;
   @JsonKey(name: "date_unix")
   int date;
+  @JsonKey(name: "details")
+  String description;
   Links links;
 
   Launch();
