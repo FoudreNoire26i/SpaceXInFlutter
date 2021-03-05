@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:space_x_flutter_app/core/models/launch.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class LaunchManager {
 
@@ -119,15 +120,15 @@ class LaunchManager {
     return launchsList;
   }
 
-/*
-  void setSpotFavorite(int spotId, bool isFavorite) async {
+
+  void setLaunchFavorite(String launchId, bool isFavorite) async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-    bool isFav = await isSpotFavorite(spotId) ?? false;
-    await sharedPreferences.setBool("spot_$spotId", !isFav);
+    bool isFav = await isLaunchFavorite(launchId) ?? false;
+    await sharedPreferences.setBool("launch_$launchId", !isFav);
   }
 
-  Future<bool> isSpotFavorite(int spotId) async {
+  Future<bool> isLaunchFavorite(String launchId) async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-    return sharedPreferences.getBool("spot_$spotId");
-  }*/
+    return sharedPreferences.getBool("launch_$launchId");
+  }
 }

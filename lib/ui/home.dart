@@ -37,13 +37,31 @@ class _MyHomePageState extends State<MyHomePage> {
             return ListView.builder(
                 itemCount : launches.length - 1,
                 itemBuilder: (context,position){
+                  final launch = launches[position];
                   return ListTile(
-                    leading: launches[position].links.patch.imageSmallUrl != null ? Image.network(launches[position].links.patch.imageSmallUrl) : Icon(Icons.image,),
-                    title: Text(launches[position].name,style: new TextStyle(fontWeight: FontWeight.bold)),
-                    subtitle: Text(launches[position].id),
+                    leading: launch.links.patch.imageSmallUrl != null ? Image.network(launch.links.patch.imageSmallUrl) : Icon(Icons.image,),
+                    title: Text(launch.name,style: new TextStyle(fontWeight: FontWeight.bold)),
+                    subtitle: Text(launch.id),
                     onTap: (){
                       Navigator.push(context, new MaterialPageRoute(builder: (context)=>DetailItem(selectedIndex: position)));
                     },
+                    trailing: FutureBuilder(
+                        future: LaunchManager().isLaunchFavorite(launch.id),
+                        builder: (context, snapshot) {
+                          bool isFav = false;
+                          if (snapshot.hasData){
+                            isFav = snapshot.data;
+                          }
+                          return IconButton(
+                                      icon: Icon(isFav ? Icons.favorite : Icons.favorite_border_outlined, color: Colors.red),
+                                      onPressed: () {
+                                        LaunchManager().setLaunchFavorite(launch.id, isFav);
+                                        setState(() {
+                                        });
+                                      }
+                          );
+                        })
+
                   );
                 });
           } else {
