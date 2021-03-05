@@ -52,9 +52,8 @@ class LaunchManager {
     return null;
   }
 */
-  /// Renvoie les spots dont le titre contient la chapine de caractère passée
-  /// en paramètre
-  List<Launch> getSpotsByName(String name) {
+  
+  List<Launch> getLaunchesByName(String name) {
     List<Launch> matchingLaunches = List();
     if (launchsList != null && launchsList.isNotEmpty) {
       for (Launch launch in launchsList) {
@@ -66,7 +65,7 @@ class LaunchManager {
     return matchingLaunches;
   }
 
-  Future<Launch> getSpotDetail(String id) async {
+  Future<Launch> getLaunchDetail(String id) async {
     var dio = Dio();
     try {
       launchDetail = await dio.get<Map<String, dynamic>>("https://api.spacexdata.com/v4/launches/$id")
@@ -85,7 +84,7 @@ class LaunchManager {
   Future<List<Launch>> getData() async {
     var dio = Dio();
     try {
-      List<Launch> apiLaunchs = await dio.get<List<dynamic>>("https://api.spacexdata.com/v4/launches")
+      List<Launch> apiLaunchs = await dio.get<List<dynamic>>("https://api.spacexdata.com/v4/launches/upcoming")
           .then((response) {
         return parseLaunches(response.data);
       }

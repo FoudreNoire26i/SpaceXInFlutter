@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:space_x_flutter_app/core/managers/company_manager.dart';
 import 'package:space_x_flutter_app/core/managers/launch_manager.dart';
+import 'package:space_x_flutter_app/core/models/company.dart';
 import 'package:space_x_flutter_app/core/models/launch.dart';
 
 import 'detailItem.dart';
@@ -25,7 +27,6 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: Text(widget.title),
       ),
-
       body: FutureBuilder(
         future : LaunchManager().getData(),
         builder: (context, snapshot) {
@@ -35,7 +36,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 itemCount : launches.length - 1,
                 itemBuilder: (context,position){
                   return ListTile(
-                    leading: Image.network(launches[position].links.patch.imageLargeUrl),
+                    leading: launches[position].links.patch.imageSmallUrl != null ? Image.network(launches[position].links.patch.imageSmallUrl) : Icon(Icons.image,),
                     title: Text(launches[position].name,style: new TextStyle(fontWeight: FontWeight.bold)),
                     subtitle: Text(launches[position].id),
                     onTap: (){

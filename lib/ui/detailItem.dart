@@ -32,7 +32,7 @@ class _DetailItem extends State<DetailItem> {
       ),
 
       body: FutureBuilder(
-        future: LaunchManager().getSpotDetail(mylaunch.id),
+        future: LaunchManager().getLaunchDetail(mylaunch.id),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             return Column(

@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:space_x_flutter_app/core/managers/launch_manager.dart';
-
-import 'core/models/launch.dart';
 import 'package:space_x_flutter_app/ui/home.dart';
 
 void main() {
