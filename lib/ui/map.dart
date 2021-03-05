@@ -1,26 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:space_x_flutter_app/core/managers/company_manager.dart';
-import 'package:space_x_flutter_app/core/managers/landpad_manager.dart';
 import 'package:space_x_flutter_app/core/managers/launch_manager.dart';
-import 'package:space_x_flutter_app/core/managers/launchpad_manager.dart';
 import 'package:space_x_flutter_app/core/models/company.dart';
-import 'package:space_x_flutter_app/core/models/landpad.dart';
 import 'package:space_x_flutter_app/core/models/launch.dart';
-import 'package:space_x_flutter_app/core/models/launchpad.dart';
 
-import 'detailItem.dart';
-
-
-class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
+class MyMapPage extends StatefulWidget {
+  MyMapPage({Key key, this.title}) : super(key: key);
 
   final String title;
 
   @override
-  _MyHomePageState createState() => _MyHomePageState();
+  _MyMapPageState createState() => _MyMapPageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _MyMapPageState extends State<MyMapPage> {
 
 
 
@@ -41,9 +34,6 @@ class _MyHomePageState extends State<MyHomePage> {
                     leading: launches[position].links.patch.imageSmallUrl != null ? Image.network(launches[position].links.patch.imageSmallUrl) : Icon(Icons.image,),
                     title: Text(launches[position].name,style: new TextStyle(fontWeight: FontWeight.bold)),
                     subtitle: Text(launches[position].id),
-                    onTap: (){
-                      Navigator.push(context, new MaterialPageRoute(builder: (context)=>DetailItem(selectedIndex: position)));
-                    },
                   );
                 });
           } else {
