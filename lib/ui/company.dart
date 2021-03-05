@@ -24,19 +24,22 @@ class _MyCompanyPageState extends State<MyCompanyPage> {
     return Scaffold(
 
       body: FutureBuilder(
-        future : LaunchManager().getData(),
+        future : CompanyManager().getData(),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
-            var launches = snapshot.data as List<Launch>;
-            return ListView.builder(
-                itemCount : launches.length - 1,
-                itemBuilder: (context,position){
-                  return ListTile(
-                    leading: launches[position].links.patch.imageSmallUrl != null ? Image.network(launches[position].links.patch.imageSmallUrl) : Icon(Icons.image,),
-                    title: Text(launches[position].name,style: new TextStyle(fontWeight: FontWeight.bold)),
-                    subtitle: Text(launches[position].id),
-                  );
-                });
+            var companyData = snapshot.data as Company;
+            return Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  Text(companyData.name,style: new TextStyle(fontWeight: FontWeight.bold),textAlign: TextAlign.center),
+                  SizedBox(height: 10),
+                  Text(companyData.founder,textAlign: TextAlign.center),
+                  SizedBox(height: 10),
+                  Text(companyData.employeesNb.toString(),textAlign: TextAlign.center),
+                  SizedBox(height: 10),
+                ],
+            );
           } else {
             return Center(
               child: CircularProgressIndicator(),
@@ -47,5 +50,6 @@ class _MyCompanyPageState extends State<MyCompanyPage> {
     );
   }
 }
+
 
 
