@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:space_x_flutter_app/ui/company.dart';
 import 'package:space_x_flutter_app/ui/home.dart';
+import 'package:space_x_flutter_app/ui/map.dart';
 
 void main() {
 
@@ -39,15 +41,9 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   static const TextStyle optionStyle =
   TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
   static List<Widget> _widgetOptions = <Widget>[
-    Text(
-      'Carte',
-      style: optionStyle,
-    ),
+    MyMapPage(title: 'Carte'),
     MyHomePage(title: 'Accueil'),
-    Text(
-      'Space X Company',
-      style: optionStyle,
-    ),
+    MyCompanyPage(title: 'Space X'),
   ];
 
   void _onItemTapped(int index) {
