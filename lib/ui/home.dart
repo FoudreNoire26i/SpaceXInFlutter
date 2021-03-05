@@ -38,9 +38,9 @@ class _MyHomePageState extends State<MyHomePage> {
                 itemCount : launches.length - 1,
                 itemBuilder: (context,position){
                   return ListTile(
-                    leading: launches[position].links.patch.imageSmallUrl != null ? Image.network(launches[position].links.patch.imageSmallUrl) : Icon(Icons.image,),
+                    leading: launches[position].links.patch.imageSmallUrl != null ? Image.network(launches[position].links.patch.imageLargeUrl) : Icon(Icons.image,),
                     title: Text(launches[position].name,style: new TextStyle(fontWeight: FontWeight.bold)),
-                    subtitle: Text(launches[position].id),
+                    subtitle: Text(launches[position].date.toString()),
                     onTap: (){
                       Navigator.push(context, new MaterialPageRoute(builder: (context)=>DetailItem(selectedIndex: position)));
                     },

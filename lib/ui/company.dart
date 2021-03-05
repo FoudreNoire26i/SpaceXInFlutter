@@ -29,15 +29,31 @@ class _MyCompanyPageState extends State<MyCompanyPage> {
           if (snapshot.hasData) {
             var companyData = snapshot.data as Company;
             return Column(
-                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  Text(companyData.name,style: new TextStyle(fontWeight: FontWeight.bold),textAlign: TextAlign.center),
-                  SizedBox(height: 10),
-                  Text(companyData.founder,textAlign: TextAlign.center),
-                  SizedBox(height: 10),
-                  Text(companyData.employeesNb.toString(),textAlign: TextAlign.center),
-                  SizedBox(height: 10),
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      SizedBox(height: 20),
+                      Text(companyData.name,style: new TextStyle(fontWeight: FontWeight.bold,fontSize: 50),textAlign: TextAlign.center),
+                      SizedBox(height: 10),
+                      Text("Fondée par "+companyData.founder,textAlign: TextAlign.center,style: new TextStyle(fontStyle: FontStyle.italic)),
+                      SizedBox(height: 10),
+                      Text("Adresse : "),
+                      SizedBox(height: 10),
+                      Text(companyData.headquarters.address,textAlign: TextAlign.center),
+                      Text(companyData.headquarters.city,textAlign: TextAlign.center),
+                      Text(companyData.headquarters.state,textAlign: TextAlign.center),
+                    ]
+                  ),
+                  Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text("Nombre d'employés : "+companyData.employeesNb.toString(),textAlign: TextAlign.center),
+                      ]
+                  ),
+
                 ],
             );
           } else {

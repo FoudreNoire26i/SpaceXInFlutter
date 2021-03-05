@@ -37,7 +37,7 @@ class _DetailItem extends State<DetailItem> {
           if (snapshot.hasData) {
             return Column(
                 children: [
-                  Image.network(mylaunch.links.patch.imageSmallUrl),
+                  Image.network(mylaunch.links.patch.imageSmallUrl)!= null ? Image.network(mylaunch.links.patch.imageLargeUrl) : Icon(Icons.image,),
                   SizedBox(height: 10),
                   Text(mylaunch.name),
                   SizedBox(height: 10),
