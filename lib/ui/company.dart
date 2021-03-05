@@ -24,19 +24,38 @@ class _MyCompanyPageState extends State<MyCompanyPage> {
     return Scaffold(
 
       body: FutureBuilder(
-        future : LaunchManager().getData(),
+        future : CompanyManager().getData(),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
-            var launches = snapshot.data as List<Launch>;
-            return ListView.builder(
-                itemCount : launches.length - 1,
-                itemBuilder: (context,position){
-                  return ListTile(
-                    leading: launches[position].links.patch.imageSmallUrl != null ? Image.network(launches[position].links.patch.imageSmallUrl) : Icon(Icons.image,),
-                    title: Text(launches[position].name,style: new TextStyle(fontWeight: FontWeight.bold)),
-                    subtitle: Text(launches[position].id),
-                  );
-                });
+            var companyData = snapshot.data as Company;
+            return Column(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      SizedBox(height: 20),
+                      Text(companyData.name,style: new TextStyle(fontWeight: FontWeight.bold,fontSize: 50),textAlign: TextAlign.center),
+                      SizedBox(height: 10),
+                      Text("Fondée par "+companyData.founder,textAlign: TextAlign.center,style: new TextStyle(fontStyle: FontStyle.italic)),
+                      SizedBox(height: 10),
+                      Text("Adresse : "),
+                      SizedBox(height: 10),
+                      Text(companyData.headquarters.address,textAlign: TextAlign.center),
+                      Text(companyData.headquarters.city,textAlign: TextAlign.center),
+                      Text(companyData.headquarters.state,textAlign: TextAlign.center),
+                    ]
+                  ),
+                  Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text("Nombre d'employés : "+companyData.employeesNb.toString(),textAlign: TextAlign.center),
+                      ]
+                  ),
+
+                ],
+            );
           } else {
             return Center(
               child: CircularProgressIndicator(),
@@ -47,5 +66,6 @@ class _MyCompanyPageState extends State<MyCompanyPage> {
     );
   }
 }
+
 
 
