@@ -1,16 +1,16 @@
 import 'package:dio/dio.dart';
-import 'package:space_x_flutter_app/core/models/launch.dart';
+import 'package:space_x_flutter_app/core/models/landpad.dart';
 
-class LaunchManager {
+class LandPadManager {
 
-  List<Launch> launchsList;
-  Launch launchDetail;
+  List<LandPad> landPadsList;
+  LandPad landPadDetail;
 
-  static final LaunchManager _instance = LaunchManager._internal();
+  static final LandPadManager _instance = LandPadManager._internal();
 
-  factory LaunchManager() => _instance;
+  factory LandPadManager() => _instance;
 
-  LaunchManager._internal();
+  LandPadManager._internal();
 /*
   /// Charge et renvoie la liste complète de spots depuis le fichier json local
   Future<List<Launch>> loadSpots(BuildContext context) async {
@@ -52,28 +52,28 @@ class LaunchManager {
     return null;
   }
 */
-  
-  List<Launch> getLaunchesByName(String name) {
-    List<Launch> matchingLaunches = List();
-    if (launchsList != null && launchsList.isNotEmpty) {
-      for (Launch launch in launchsList) {
-        if (launch.name.toLowerCase().contains(name.toLowerCase())) {
-          matchingLaunches.add(launch);
+
+  List<LandPad> getLandPadsByName(String name) {
+    List<LandPad> matchingLaunches = List();
+    if (landPadsList != null && landPadsList.isNotEmpty) {
+      for (LandPad landPad in landPadsList) {
+        if (landPad.name.toLowerCase().contains(name.toLowerCase())) {
+          matchingLaunches.add(landPad);
         }
       }
     }
     return matchingLaunches;
   }
 
-  Future<Launch> getLaunchDetail(String id) async {
+  Future<LandPad> getLandPadDetail(String id) async {
     var dio = Dio();
     try {
-      launchDetail = await dio.get<Map<String, dynamic>>("https://api.spacexdata.com/v4/launches/$id")
+      landPadDetail = await dio.get<Map<String, dynamic>>("https://api.spacexdata.com/v4/landpads/$id")
           .then((response) {
-        return Launch.fromJson(response.data);
+        return LandPad.fromJson(response.data);
       }
       );
-      return launchDetail;
+      return landPadDetail;
     }
     catch (e) {
       print("Erreur get detail : $e");
@@ -81,42 +81,26 @@ class LaunchManager {
     }
   }
 
-  Future<List<Launch>> getData() async {
+  Future<List<LandPad>> getData() async {
     var dio = Dio();
     try {
-      List<Launch> apiLaunchs = await dio.get<List<dynamic>>("https://api.spacexdata.com/v4/launches/upcoming")
+      List<LandPad> apiLandPads = await dio.get<List<dynamic>>("https://api.spacexdata.com/v4/landpads")
           .then((response) {
-        return parseLaunches(response.data);
+        return parseLandPads(response.data);
       }
       );
-      return apiLaunchs;
+      return apiLandPads;
     }
     catch (e) {
       print("Erreur get : $e");
       return null;
     }
+
   }
 
-  Future<List<Launch>> getOldData() async {
-    var dio = Dio();
-    try {
-      List<Launch> apiLaunchs = await dio.get<List<dynamic>>("https://api.spacexdata.com/v4/launches/past")
-          .then((response) {
-        return parseLaunches(response.data);
-      }
-      );
-      return apiLaunchs;
-    }
-    catch (e) {
-      print("Erreur get : $e");
-      return null;
-    }
-  }
-
-
-  List<Launch> parseLaunches(List<dynamic> json){
-    launchsList = json.map<Launch>((js) => Launch.fromJson(js)).toList();
-    return launchsList;
+  List<LandPad> parseLandPads(List<dynamic> json){
+    landPadsList = json.map<LandPad>((js) => LandPad.fromJson(js)).toList();
+    return landPadsList;
   }
 
 /*

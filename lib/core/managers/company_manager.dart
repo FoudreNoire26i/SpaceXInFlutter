@@ -14,12 +14,12 @@ class CompanyManager {
   Future<Company> getData() async {
     var dio = Dio();
     try {
-      Company apiCompanys = await dio.get<Map<String, dynamic>>("https://api.spacexdata.com/v4/company")
+      Company apiCompany = await dio.get<Map<String, dynamic>>("https://api.spacexdata.com/v4/company")
           .then((response) {
         return parseCompany(response.data);
       }
       );
-      return apiCompanys;
+      return apiCompany;
     }
     catch (e) {
       print("Erreur get : $e");

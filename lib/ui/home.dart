@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:space_x_flutter_app/core/managers/company_manager.dart';
+import 'package:space_x_flutter_app/core/managers/landpad_manager.dart';
 import 'package:space_x_flutter_app/core/managers/launch_manager.dart';
+import 'package:space_x_flutter_app/core/managers/launchpad_manager.dart';
 import 'package:space_x_flutter_app/core/models/company.dart';
+import 'package:space_x_flutter_app/core/models/landpad.dart';
 import 'package:space_x_flutter_app/core/models/launch.dart';
+import 'package:space_x_flutter_app/core/models/launchpad.dart';
 
 import 'detailItem.dart';
 
