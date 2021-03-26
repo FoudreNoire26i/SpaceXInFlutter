@@ -6,6 +6,7 @@ class LaunchManager {
 
   List<Launch> launchsList;
   Launch launchDetail;
+  Launch nextLaunch;
 
   static final LaunchManager _instance = LaunchManager._internal();
 
@@ -55,7 +56,7 @@ class LaunchManager {
 */
   
   List<Launch> getLaunchesByName(String name) {
-    List<Launch> matchingLaunches = List();
+    List<Launch> matchingLaunches = [];
     if (launchsList != null && launchsList.isNotEmpty) {
       for (Launch launch in launchsList) {
         if (launch.name.toLowerCase().contains(name.toLowerCase())) {
@@ -78,6 +79,22 @@ class LaunchManager {
     }
     catch (e) {
       print("Erreur get detail : $e");
+      return null;
+    }
+  }
+
+  Future<Launch> getNextLaunchDetail() async {
+    var dio = Dio();
+    try {
+      nextLaunch = await dio.get<Map<String, dynamic>>("https://api.spacexdata.com/v4/launches/next")
+          .then((response) {
+        return Launch.fromJson(response.data);
+      }
+      );
+      return nextLaunch;
+    }
+    catch (e) {
+      print("Erreur get nextLaunch : $e");
       return null;
     }
   }

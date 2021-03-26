@@ -12,7 +12,8 @@ Launch _$LaunchFromJson(Map<String, dynamic> json) {
     $checkedConvert(json, 'id', (v) => val.id = v as String);
     $checkedConvert(json, 'name', (v) => val.name = v as String);
     $checkedConvert(json, 'success', (v) => val.success = v as bool);
-    $checkedConvert(json, 'date_unix', (v) => val.date = v as int);
+    $checkedConvert(json, 'date_unix', (v) => val.date_unix = v as int);
+    $checkedConvert(json, 'date_local', (v) => val.date_local = v as String);
     $checkedConvert(json, 'details', (v) => val.description = v as String);
     $checkedConvert(
         json,
@@ -20,14 +21,15 @@ Launch _$LaunchFromJson(Map<String, dynamic> json) {
         (v) => val.links =
             v == null ? null : Links.fromJson(v as Map<String, dynamic>));
     return val;
-  }, fieldKeyMap: const {'date': 'date_unix', 'description': 'details'});
+  }, fieldKeyMap: const {'description': 'details'});
 }
 
 Map<String, dynamic> _$LaunchToJson(Launch instance) => <String, dynamic>{
       'id': instance.id,
       'name': instance.name,
       'success': instance.success,
-      'date_unix': instance.date,
+      'date_unix': instance.date_unix,
+      'date_local': instance.date_local,
       'details': instance.description,
       'links': instance.links?.toJson(),
     };

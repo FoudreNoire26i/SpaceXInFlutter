@@ -9,8 +9,8 @@ class Launch {
   String id;
   String name;
   bool success;
-  @JsonKey(name: "date_unix")
-  int date;
+  int date_unix;
+  String date_local;
   @JsonKey(name: "details")
   String description;
   Links links;

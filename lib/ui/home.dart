@@ -28,7 +28,6 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
 
     return Scaffold(
-
       body: FutureBuilder(
         future : LaunchManager().getData(),
         builder: (context, snapshot) {
