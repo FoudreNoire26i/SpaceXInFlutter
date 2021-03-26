@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:space_x_flutter_app/ui/company.dart';
 import 'package:space_x_flutter_app/ui/home.dart';
 import 'package:space_x_flutter_app/ui/map.dart';
+import 'package:space_x_flutter_app/ui/notification.dart';
 
 void main() {
 
@@ -44,6 +45,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
     MyMapPage(title: 'Carte'),
     MyHomePage(title: 'Accueil'),
     MyCompanyPage(title: 'Space X'),
+    MyNotificationPage(title: 'Notification'),
   ];
 
   void _onItemTapped(int index) {
@@ -77,6 +79,11 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
             icon: Icon(Icons.airplanemode_active),
             label: 'Space X',
             backgroundColor: Colors.lightBlueAccent,
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.settings),
+            label: 'Réglages',
+            backgroundColor: Colors.blueGrey,
           ),
         ],
         currentIndex: _selectedIndex,
