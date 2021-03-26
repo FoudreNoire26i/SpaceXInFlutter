@@ -86,7 +86,7 @@ class _MyHomePageState extends State<MyHomePage> {
                           title: Text(launches[position].name,
                               style:
                                   new TextStyle(fontWeight: FontWeight.bold)),
-                          subtitle: Text(launches[position].date.toString()),
+                          subtitle: Text(launches[position].date_local),
                           onTap: () {
                             Navigator.push(
                                 context,

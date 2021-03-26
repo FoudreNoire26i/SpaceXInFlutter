@@ -17,6 +17,7 @@ class MyNotificationPage extends StatefulWidget {
 class _MyNotificationPageState extends State<MyNotificationPage> {
   @override
   Widget build(BuildContext context) {
+    return Container();
   }
 
 
