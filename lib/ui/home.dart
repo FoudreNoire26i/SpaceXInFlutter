@@ -26,7 +26,9 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
+
       body: FutureBuilder(
         future: LaunchManager().getData(),
         builder: (context, snapshot) {
@@ -70,6 +72,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       shrinkWrap: true,
                       primary: true,
                       itemBuilder: (context, position) {
+                        final launch = launches[position];
                         return ListTile(
                           leading: launches[position]
                                       .links
@@ -92,6 +95,22 @@ class _MyHomePageState extends State<MyHomePage> {
                                     builder: (context) =>
                                         DetailItem(selectedIndex: position)));
                           },
+                            trailing: FutureBuilder(
+                                future: LaunchManager().isLaunchFavorite(launch.id),
+                                builder: (context, snapshot) {
+                                  bool isFav = false;
+                                  if (snapshot.hasData){
+                                    isFav = snapshot.data;
+                                  }
+                                  return IconButton(
+                                      icon: Icon(isFav ? Icons.favorite : Icons.favorite_border_outlined, color: Colors.red),
+                                      onPressed: () {
+                                        LaunchManager().setLaunchFavorite(launch.id, isFav);
+                                        setState(() {
+                                        });
+                                      }
+                                  );
+                                })
                         );
                       }),
                 )
