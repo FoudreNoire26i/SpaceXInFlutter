@@ -35,15 +35,21 @@ class _DetailItem extends State<DetailItem> {
         future: LaunchManager().getLaunchDetail(mylaunch.id),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
-            return Column(
+            return Padding(
+                padding: EdgeInsets.all(16.0),
+              child: Center(
+                child: Column(
                 children: [
-                  mylaunch.links.patch.imageSmallUrl != null ? Image.network(mylaunch.links.patch.imageLargeUrl) : Icon(Icons.image),
-                  SizedBox(height: 10),
-                  Text(mylaunch.name),
-                  SizedBox(height: 10),
-                ]
+                mylaunch.links.patch.imageSmallUrl != null ? Image.network(mylaunch.links.patch.imageLargeUrl) : Icon(Icons.image),
+          SizedBox(height: 10),
+          Text(mylaunch.name ?? "NO NAME"),
+          SizedBox(height: 10),
+          Text(mylaunch.description ?? "NO DESCIPTION",textAlign: TextAlign.center),
+          SizedBox(height: 10),
+          ]
+          ),
+          ),
             );
-
           } else {
             return Center(
               child: CircularProgressIndicator(),
