@@ -14,6 +14,7 @@ Launch _$LaunchFromJson(Map<String, dynamic> json) {
     $checkedConvert(json, 'success', (v) => val.success = v as bool);
     $checkedConvert(json, 'date_unix', (v) => val.date_unix = v as int);
     $checkedConvert(json, 'date_local', (v) => val.date_local = v as String);
+    $checkedConvert(json, 'date_utc', (v) => val.date_utc = v as String);
     $checkedConvert(json, 'details', (v) => val.description = v as String);
     $checkedConvert(
         json,
@@ -30,6 +31,7 @@ Map<String, dynamic> _$LaunchToJson(Launch instance) => <String, dynamic>{
       'success': instance.success,
       'date_unix': instance.date_unix,
       'date_local': instance.date_local,
+      'date_utc': instance.date_utc,
       'details': instance.description,
       'links': instance.links?.toJson(),
     };

@@ -115,6 +115,18 @@ class LaunchManager {
     }
   }
 
+  Future<List<Launch>> getFavLaunches() async {
+    List<Launch> apiLaunchs = await getData();
+    List<Launch> favLaunchs = [];
+    for (int i = 0;  i < apiLaunchs.length; i++){
+      bool isFav = await isLaunchFavorite(apiLaunchs[i].id);
+      if (isFav){
+        favLaunchs.add(apiLaunchs[i]);
+      }
+    }
+      return favLaunchs;
+    }
+
   Future<List<Launch>> getOldData() async {
     var dio = Dio();
     try {
@@ -146,6 +158,6 @@ class LaunchManager {
 
   Future<bool> isLaunchFavorite(String launchId) async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-    return sharedPreferences.getBool("launch_$launchId");
+    return sharedPreferences.getBool("launch_$launchId") ?? false;
   }
 }

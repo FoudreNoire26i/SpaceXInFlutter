@@ -11,6 +11,7 @@ class Launch {
   bool success;
   int date_unix;
   String date_local;
+  String date_utc;
   @JsonKey(name: "details")
   String description;
   Links links;

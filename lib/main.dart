@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
@@ -62,11 +64,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   Widget build(BuildContext context) {
     tz.initializeTimeZones();
     tz.setLocalLocation(tz.getLocation("Europe/Paris"));
-
-
-
-
-    launchNotif();
+    //launchNotif();
 
 
     return Scaffold(
@@ -115,13 +113,13 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
     flutterLocalNotificationsPlugin.initialize(initSetttings,
       onSelectNotification: selectNotification,);
     //showTestNotification();
-    createNotifWithDate();
     LaunchManager().getNextLaunchDetail().then((value) => {
       flutterLocalNotificationsPlugin.zonedSchedule(
-      0,
-      "${value.name} will be launch soon",
-      'Launch Date : ${value.date_local}',
-      tz.TZDateTime.now(tz.local).add(const Duration(seconds: 5)),
+      new Random().nextInt(value.date_unix),
+      "${value.name} will be launch in one hour",
+      'Launch Date : ${DateTime.parse(value.date_utc).toLocal().toIso8601String()}',
+      tz.TZDateTime.from(DateTime.parse(value.date_utc), tz.local).subtract(const Duration(hours: 1)),
+       //tz.TZDateTime.now(tz.local).add(const Duration(seconds: 5)),
 
       const NotificationDetails(
       android: AndroidNotificationDetails('your channel id',
@@ -134,9 +132,6 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
 
   }
 
-  void createNotifWithDate() async{
-
-  }
 
   Future selectNotification(String payload) async {
     print("Notifications clicked");
