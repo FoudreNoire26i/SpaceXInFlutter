@@ -34,37 +34,48 @@ class _MyHomePageState extends State<MyHomePage> {
           if (snapshot.hasData) {
             var launches = snapshot.data as List<Launch>;
 
-            int endTime = DateTime.now().millisecondsSinceEpoch + 1000 * 40;
-
             return Column(
               children: [
-                Container(
-                  width: double.infinity,
-                  color: Colors.grey,
-                  padding: const EdgeInsets.all(30.0),
-                  child: CountdownTimer(
-                    widgetBuilder: (_, CurrentRemainingTime time) {
-                      if (time == null) {
-                        return Center(
-                            child : Text('NEW LAUNCH !',
-                                style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 20.0,
-                                    color: Colors.purple))
-                        );
+                FutureBuilder(
+                    future: LaunchManager().getNextLaunchDetail(),
+                    builder: (context, snapshot) {
+                      int endTime = 0;
+                      Launch nextLaunch;
+                      if (snapshot.hasData){
+                        nextLaunch = snapshot.data;
+                        endTime = DateTime.now().millisecondsSinceEpoch + (DateTime.parse(nextLaunch.date_local).millisecondsSinceEpoch - DateTime.now().millisecondsSinceEpoch);
                       }
-                      return Center(
-                        child: Text(
-                            'Next launch in : \ndays: ${time.days != null ? time.days : 0} , hours: ${time.hours != null ? time.hours : 0} , min: ${time.min != null ? time.min : 0} , sec: ${time.sec} ',
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 20.0,
-                                color: Colors.purple)),
+
+
+                      return Container(
+                        width: double.infinity,
+                        color: Colors.grey,
+                        padding: const EdgeInsets.all(30.0),
+                        child: CountdownTimer(
+                          widgetBuilder: (_, CurrentRemainingTime time) {
+                            if (time == null) {
+                              return Center(
+                                  child : Text('NEW LAUNCH !',
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 20.0,
+                                          color: Colors.blueAccent))
+                              );
+                            }
+                            return Center(
+                              child: Text(
+                                  'Next launch in : \ndays: ${time.days != null ? time.days : 0} , hours: ${time.hours != null ? time.hours : 0} , min: ${time.min != null ? time.min : 0} , sec: ${time.sec} ',
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 20.0,
+                                      color: Colors.blueAccent)),
+                            );
+                          },
+                          endTime: endTime,
+                        ),
                       );
-                    },
-                    endTime: endTime,
-                  ),
-                ),
+                    }),
                 Expanded(
                   child: ListView.builder(
                       itemCount: launches.length - 1,
