@@ -47,33 +47,42 @@ class _MyHomePageState extends State<MyHomePage> {
                       }
 
 
-                      return Container(
-                        width: double.infinity,
-                        color: Colors.grey,
-                        padding: const EdgeInsets.all(30.0),
-                        child: CountdownTimer(
-                          widgetBuilder: (_, CurrentRemainingTime time) {
-                            if (time == null) {
-                              return Center(
-                                  child : Text('NEW LAUNCH !',
+                      return new InkWell(
+                        onTap: (){
+                          Navigator.push(
+                          context,
+                          new MaterialPageRoute(
+                          builder: (context) =>
+                          DetailItem(selectedIndex: 0)));
+                      },
+                          child: Container(
+                            width: double.infinity,
+                            color: Colors.grey,
+                            padding: const EdgeInsets.all(30.0),
+                            child: CountdownTimer(
+                              widgetBuilder: (_, CurrentRemainingTime time) {
+                                if (time == null) {
+                                  return Center(
+                                      child : Text('NEW LAUNCH !',
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 20.0,
+                                              color: Colors.blueAccent))
+                                  );
+                                }
+                                return Center(
+                                  child: Text(
+                                      'Next launch in : \ndays: ${time.days != null ? time.days : 0} , hours: ${time.hours != null ? time.hours : 0} , min: ${time.min != null ? time.min : 0} , sec: ${time.sec} ',
+                                      textAlign: TextAlign.center,
                                       style: TextStyle(
                                           fontWeight: FontWeight.bold,
                                           fontSize: 20.0,
-                                          color: Colors.blueAccent))
-                              );
-                            }
-                            return Center(
-                              child: Text(
-                                  'Next launch in : \ndays: ${time.days != null ? time.days : 0} , hours: ${time.hours != null ? time.hours : 0} , min: ${time.min != null ? time.min : 0} , sec: ${time.sec} ',
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 20.0,
-                                      color: Colors.blueAccent)),
-                            );
-                          },
-                          endTime: endTime,
-                        ),
+                                          color: Colors.blueAccent)),
+                                );
+                              },
+                              endTime: endTime,
+                            ),
+                          ),
                       );
                     }),
                 Expanded(
